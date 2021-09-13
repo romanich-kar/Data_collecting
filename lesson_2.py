@@ -59,7 +59,6 @@ def hh(main_link, search_str, n_str):
         html = requests.get(main_link+next_btn_link,headers=headers).text
         parsed_html = bs(html,'lxml')
 
-    pprint(jobs)
     return jobs
 
 
@@ -116,7 +115,6 @@ def superjob(main_link, search_str, n_str):
         else:
             print('Ошибка')
 
-    pprint(jobs)
     return jobs
 
 search_str='Python'
