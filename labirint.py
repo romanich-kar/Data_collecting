@@ -23,7 +23,7 @@ class LabirintSpider(scrapy.Spider):
             'author': response.css('div.authors a::text').extract_first().strip(),
             'price': response.css('span.buying-priceold-val-number::text').extract_first().strip(),
             'discount_price': response.css('span.buying-pricenew-val-number::text').extract_first().strip(),
-            'rating': response.css('#rate::text')
+            'rating': response.css('#rate::text').extract_first().strip()
         }
 
         db.labirint.insert(item)
