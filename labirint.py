@@ -1,5 +1,6 @@
 import scrapy
-from scrapy.http import HtmlResponse
+import requests
+from lxml import html
 from pymongo import MongoClient
 
 client = MongoClient(host='localhost', port=27017)
@@ -9,7 +10,10 @@ class LabirintSpider(scrapy.Spider):
     name = 'labirint'
     allowed_domains = ['https://www.labirint.ru']
     start_urls = ['http://https://www.labirint.ru/books/']
-    pages_count = 50
+    response = requests.get('http://https://www.labirint.ru/books/')
+    root = html.fromstring(response.text)
+    a = root.xpath('//*[@id="catalog-navigation"]/form/div[1]/div[2]/div/div/span[1]/span/text()')
+    pages_count = int(input('Всего на сайте ', a, ' книг. Информацию о скольких хотите собрать? '))
 
     def start_requests(self):
         for page in range(1, 1 + self.pages_count):
